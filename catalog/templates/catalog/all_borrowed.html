@@ -1,0 +1,20 @@
+{%extends "base.html"%}
+
+{% block content %}
+       <h1>All Borrowed Book </h1>
+       <hr>
+        {% for books in bookinstance_list%}
+        <table>
+            <tr>
+                {% if user.is_staff %}
+                    <td>{{books.book.title}}    &#10137; </td>
+                    <td>{{books.book.author}}   &#10137; </td>
+                    <td>({{books.due_back}}) </td>
+                    <td><a href="{% url 'renew-book-librarian' books.id %}">Renew</a></td>
+                {% else%}
+                    <p>You don't have access to this page .</p>
+                {% endif %}
+            </tr>
+        </table>
+        {% endfor %}
+       {% endblock %}
